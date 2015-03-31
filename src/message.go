@@ -1,4 +1,4 @@
-package app
+package main
 
 // * parseTag parses "endpoints" field tag into endpointsTag struct.
 //   <https://github.com/GoogleCloudPlatform/go-endpoints/blob/master/endpoints/apiconfig.go#L643>
