@@ -11,18 +11,9 @@ func init() {
 		panic(err.Error())
 	}
 	endpoints.HandleHTTP()
-	//http.HandleFunc("/", handleFunc)
+	http.HandleFunc("/", handleFunc)
 }
 
-func RegisterService() (rpcService *endpoints.RPCService, err error) {
-	api := &Api{}
-	rpcService, err = endpoints.RegisterService(api,
-		"api", "v1", "api", true)
-	if err != nil {
-		return
-	}
+func handleFunc(w http.ResponseWriter, r *http.Request) {
 	return
-}
-
-type Api struct {
 }
