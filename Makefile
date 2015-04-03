@@ -33,6 +33,6 @@ MINCSS = $(SASS:.sass=.min.css)
 js: $(MINJS) $(JS)
 css: $(MINCSS) $(CSS)
 
-FBS = $(wildcard $(FBS_DIR)/**/*.fbs)
+FBS = $(shell find $(FBS_DIR) -name "*.fbs")
 fbs: $(FBS)
-	$(BIN_FLATC) -g -o src/fbs $<
+	$(BIN_FLATC) -g -o $(FBS_DIR) $<
