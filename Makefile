@@ -35,4 +35,4 @@ css: $(MINCSS) $(CSS)
 
 FBS = $(shell find $(FBS_DIR) -name "*.fbs")
 fbs: $(FBS)
-	$(BIN_FLATC) -g -o $(FBS_DIR) $<
+	$(BIN_FLATC) -g -o $(FBS_DIR) $(FBS_DIR)/*.fbs
