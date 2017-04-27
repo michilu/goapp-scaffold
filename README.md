@@ -3,10 +3,6 @@ A scaffold for Google App Engine Golang.
 
 # initial setup
 
-## setup build tools
-
-    $ npm install
-
 ## setup GOPATH and GOROOT
 
     $ goof make goapp-scaffold

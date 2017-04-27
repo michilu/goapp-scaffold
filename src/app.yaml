@@ -6,14 +6,8 @@ threadsafe: true
 
 handlers:
 # Static assets
-- url: /_.js
-  static_files: _js/main.min.js
-  upload: _js/main.min.js
-- url: /_.css
-  static_files: _css/main.min.css
-  upload: _css/main.min.css
-- url: /_static
-  static_dir: static
+#- url: /_static
+#  static_dir: static
 - url: /_ah/spi/.*
   script: _go_app
 - url: /.*
