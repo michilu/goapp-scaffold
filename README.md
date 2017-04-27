@@ -1,25 +1,16 @@
 # goapp-scaffold
 A scaffold for Google App Engine Golang.
 
+[![wercker status](https://app.wercker.com/status/01a88b7c9b69392341715dc7b9a234ba/m/master "wercker status")](https://app.wercker.com/project/byKey/01a88b7c9b69392341715dc7b9a234ba)
+
 # initial setup
 
-## setup build tools
+# dep
 
-    $ npm install
+    $ go get -u github.com/golang/dep/...
+    $ dep init
+    $ dep ensure
 
-## setup GOPATH and GOROOT
+# start server
 
-    $ goof make goapp-scaffold
-    (go:goapp-scaffold)$ vi activate
-
-    export GOPATH=/<path-to>/goapp-scaffold/gopath
-    export GOROOT=$HOME/google-cloud-sdk/platform/google_appengine/goroot
-
-# go get
-
-    (go:goapp-scaffold)$ goapp get github.com/GoogleCloudPlatform/go-endpoints/endpoints
-    ...
-
-# go serve
-
-    (go:goapp-scaffold)$ goapp serve src
+    $ dev_appserver.py backend

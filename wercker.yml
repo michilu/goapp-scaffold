@@ -1,6 +1,52 @@
-box: michilu/goapp
+box: michilu/docker-goapp
+build:
+  steps:
+  - script:
+      name: set App Engine source directories
+      code: |-
+        : ${SRC:="./backend"}
+  - setup-go-workspace
+  - script:
+      name: temporary fix
+      code: |
+        sudo chmod -R a+w `goapp env GOROOT`/pkg
+  - script:
+      name: dep
+      code: |
+        go version
+        GOROOT=/usr/local/go go get -u github.com/golang/dep/...
+        /usr/local/go_appengine/gopath/bin/dep ensure
+  - script:
+      name: set GOPATH
+      code: |
+        export GOPATH="$GOPATH:$WERCKER_SOURCE_DIR"
+        goapp env GOPATH
+  - script:
+      name: goapp build
+      code: |
+        goapp build ${SRC}
+  - script:
+      name: goapp test
+      code: |
+        goapp test ${SRC}
+  - script:
+      name: copy to output directory
+      code: |-
+        rsync -avz ${GOPATH%%:*}/ $WERCKER_OUTPUT_DIR
+  after-steps:
+  - script:
+      name: set something to $WERCKER_STARTED_BY for hipchat-notify when starting from git-push event
+      code: |-
+        : ${WERCKER_STARTED_BY:="''(empty)"}
+  - hipchat-notify:
+      token: $HIPCHAT_TOKEN
+      room-id: $HIPCHAT_ROOM_ID
 deploy:
   steps:
   - michilu/go-appengine-deploy:
-      email:    $APP_ENGINE_EMAIL
-      password: $APP_ENGINE_PASSWORD
+      token:  $APP_ENGINE_TOKEN
+  after-steps:
+  - hipchat-notify:
+      token: $HIPCHAT_TOKEN
+      room-id: $HIPCHAT_ROOM_ID
+      passed-notify: true

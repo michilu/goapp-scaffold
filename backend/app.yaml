@@ -1,0 +1,41 @@
+application: appid
+version: 1
+runtime: go
+api_version: go1
+threadsafe: true
+
+instance_class: F1
+automatic_scaling:
+  max_idle_instances: 1
+
+default_expiration: 10m
+
+handlers:
+# Static assets
+#- url: /_static
+#  static_dir: static
+- url: /_ah/spi/.*
+  script: _go_app
+- url: /.*
+  script: _go_app
+
+nobuild_files:
+- vendor
+
+skip_files:
+- |
+  ^(.*/)?(
+  (#.*#)|
+  (.*\.mapping)|
+  (.*\.po)|
+  (.*\.pot)|
+  (.*\.py[co])|
+  (.*\.sw?)|
+  (.*\.yaml)|
+  (.*_test\.go)|
+  (.*~)|
+  (LICENSE)|
+  (Makefile.*)|
+  (\..*)|
+  (vendor/.*)|
+  )$
