@@ -3,10 +3,11 @@ A scaffold for Google App Engine Golang.
 
 # initial setup
 
-# go get
+# dep
 
-    $ goapp get github.com/GoogleCloudPlatform/go-endpoints/endpoints
-    ...
+    $ go get -u github.com/golang/dep/...
+    $ dep init
+    $ dep ensure
 
 # go serve
 

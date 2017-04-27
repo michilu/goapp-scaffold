@@ -11,6 +11,12 @@ build:
       code: |
         sudo chmod -R a+w `goapp env GOROOT`/pkg
   - script:
+      name: dep
+      code: |
+        go version
+        GOROOT=/usr/local/go go get -u github.com/golang/dep/...
+        /usr/local/go_appengine/gopath/bin/dep ensure
+  - script:
       name: set GOPATH
       code: |
         export GOPATH="$GOPATH:$WERCKER_SOURCE_DIR"

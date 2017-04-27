@@ -19,6 +19,9 @@ handlers:
 - url: /.*
   script: _go_app
 
+nobuild_files:
+- vendor
+
 skip_files:
 - |
   ^(.*/)?(
@@ -34,4 +37,5 @@ skip_files:
   (LICENSE)|
   (Makefile.*)|
   (\..*)|
+  (vendor/.*)|
   )$
