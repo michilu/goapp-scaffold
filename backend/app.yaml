@@ -4,6 +4,12 @@ runtime: go
 api_version: go1
 threadsafe: true
 
+instance_class: F1
+automatic_scaling:
+  max_idle_instances: 1
+
+default_expiration: 10m
+
 handlers:
 # Static assets
 #- url: /_static
@@ -12,3 +18,20 @@ handlers:
   script: _go_app
 - url: /.*
   script: _go_app
+
+skip_files:
+- |
+  ^(.*/)?(
+  (#.*#)|
+  (.*\.mapping)|
+  (.*\.po)|
+  (.*\.pot)|
+  (.*\.py[co])|
+  (.*\.sw?)|
+  (.*\.yaml)|
+  (.*_test\.go)|
+  (.*~)|
+  (LICENSE)|
+  (Makefile.*)|
+  (\..*)|
+  )$
