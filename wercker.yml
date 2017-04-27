@@ -1,4 +1,32 @@
-box: michilu/goapp
+box: michilu/docker-goapp
+build:
+  steps:
+  - script:
+      name: set App Engine source directories
+      code: |-
+        : ${SRC:="./backend"}
+  - setup-go-workspace
+  - script:
+      name: temporary fix
+      code: |
+        sudo chmod -R a+w `goapp env GOROOT`/pkg
+  - script:
+      name: set GOPATH
+      code: |
+        export GOPATH="$GOPATH:$WERCKER_SOURCE_DIR"
+        goapp env GOPATH
+  - script:
+      name: goapp build
+      code: |
+        goapp build ${SRC}
+  - script:
+      name: goapp test
+      code: |
+        goapp test ${SRC}
+  - script:
+      name: copy to output directory
+      code: |-
+        rsync -avz ${GOPATH%%:*}/ $WERCKER_OUTPUT_DIR
   after-steps:
   - script:
       name: set something to $WERCKER_STARTED_BY for hipchat-notify when starting from git-push event
