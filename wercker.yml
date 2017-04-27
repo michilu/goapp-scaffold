@@ -1,5 +1,18 @@
 box: michilu/goapp
+  after-steps:
+  - script:
+      name: set something to $WERCKER_STARTED_BY for hipchat-notify when starting from git-push event
+      code: |-
+        : ${WERCKER_STARTED_BY:="''(empty)"}
+  - hipchat-notify:
+      token: $HIPCHAT_TOKEN
+      room-id: $HIPCHAT_ROOM_ID
 deploy:
   steps:
   - michilu/go-appengine-deploy:
       token:  $APP_ENGINE_TOKEN
+  after-steps:
+  - hipchat-notify:
+      token: $HIPCHAT_TOKEN
+      room-id: $HIPCHAT_ROOM_ID
+      passed-notify: true
