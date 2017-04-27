@@ -1,0 +1,4 @@
+
+[[dependencies]]
+  name = "github.com/GoogleCloudPlatform/go-endpoints"
+  revision = "44305767cad1f30e5d836ed5093d30d9b9d21225"
