@@ -9,6 +9,6 @@ A scaffold for Google App Engine Golang.
     $ dep init
     $ dep ensure
 
-# go serve
+# start server
 
-    $ goapp serve src
+    $ dev_appserver.py backend
