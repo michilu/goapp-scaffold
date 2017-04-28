@@ -17,7 +17,10 @@ var (
 	audiences = []string{clientID}
 )
 
-func registerService() (rpcService *endpoints.RPCService, err error) {
+func registerService() (
+	rpcService *endpoints.RPCService,
+	err error,
+) {
 	rpcService, err = endpoints.RegisterService(&API{},
 		"api", "v1", "api", true)
 	if err != nil {
@@ -37,8 +40,11 @@ type API struct {
 }
 
 // Items ...
-func (api *API) Items(r *http.Request,
-	req *ItemsRequestMessage, resp *ItemsResponseMessage) (err error) {
+func (api *API) Items(
+	r *http.Request,
+	req *ItemsRequestMessage,
+	resp *ItemsResponseMessage,
+) (err error) {
 
 	c := endpoints.NewContext(r)
 	_, err = getCurrentUser(c)
@@ -49,7 +55,12 @@ func (api *API) Items(r *http.Request,
 	return
 }
 
-func getCurrentUser(c endpoints.Context) (u *user.User, err error) {
+func getCurrentUser(
+	c endpoints.Context,
+) (
+	u *user.User,
+	err error,
+) {
 	u, err = endpoints.CurrentUser(c, scopes, audiences, clientIDs)
 	if err != nil {
 		c.Infof("%v", err)
