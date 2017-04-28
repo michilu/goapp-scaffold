@@ -29,6 +29,8 @@ build:
       name: goapp test
       code: |
         goapp test ${SRC}
+  - wercker/golint:
+      exclude: "vendor/"
   - script:
       name: copy to output directory
       code: |-

@@ -8,17 +8,17 @@ import (
 )
 
 const (
-	clientId = "***.apps.googleusercontent.com"
+	clientID = "***.apps.googleusercontent.com"
 )
 
 var (
 	scopes    = []string{endpoints.EmailScope}
-	clientIds = []string{clientId, endpoints.APIExplorerClientID}
-	audiences = []string{clientId}
+	clientIDs = []string{clientID, endpoints.APIExplorerClientID}
+	audiences = []string{clientID}
 )
 
-func RegisterService() (rpcService *endpoints.RPCService, err error) {
-	api := &Api{}
+func registerService() (rpcService *endpoints.RPCService, err error) {
+	api := &API{}
 	rpcService, err = endpoints.RegisterService(api,
 		"api", "v1", "api", true)
 	if err != nil {
@@ -28,15 +28,17 @@ func RegisterService() (rpcService *endpoints.RPCService, err error) {
 	info := rpcService.MethodByName("Items").Info()
 	info.Name, info.HTTPMethod, info.Path, info.Desc =
 		"item.list", "GET", "items", "List items."
-	info.Scopes, info.ClientIds, info.Audiences = scopes, clientIds, audiences
+	info.Scopes, info.ClientIds, info.Audiences = scopes, clientIDs, audiences
 
 	return
 }
 
-type Api struct {
+// API ...
+type API struct {
 }
 
-func (api *Api) Items(r *http.Request,
+// Items ...
+func (api *API) Items(r *http.Request,
 	req *ItemsRequestMessage, resp *ItemsResponseMessage) (err error) {
 
 	c := endpoints.NewContext(r)
@@ -49,7 +51,7 @@ func (api *Api) Items(r *http.Request,
 }
 
 func getCurrentUser(c endpoints.Context) (u *user.User, err error) {
-	u, err = endpoints.CurrentUser(c, scopes, audiences, clientIds)
+	u, err = endpoints.CurrentUser(c, scopes, audiences, clientIDs)
 	if err != nil {
 		c.Infof("%v", err)
 		err = endpoints.UnauthorizedError
