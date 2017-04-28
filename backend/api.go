@@ -18,13 +18,13 @@ var (
 )
 
 func registerService() (
-	rpcService *endpoints.RPCService,
-	err error,
+	*endpoints.RPCService,
+	error,
 ) {
-	rpcService, err = endpoints.RegisterService(&API{},
+	rpcService, err := endpoints.RegisterService(&API{},
 		"api", "v1", "api", true)
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	info := rpcService.MethodByName("Items").Info()
@@ -32,7 +32,7 @@ func registerService() (
 		"item.list", "GET", "items", "List items."
 	info.Scopes, info.ClientIds, info.Audiences = scopes, clientIDs, audiences
 
-	return
+	return rpcService, nil
 }
 
 // API ...
