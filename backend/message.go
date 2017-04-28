@@ -14,12 +14,15 @@ package app
 //   - max=val, max value
 //   - desc=val, description
 
+// ItemsRequestMessage ...
 type ItemsRequestMessage struct {
 }
 
+// ItemsResponseMessage ...
 type ItemsResponseMessage struct {
 	Items []*ItemResponseMessage `json:"items"`
 }
 
+// ItemResponseMessage ...
 type ItemResponseMessage struct {
 }

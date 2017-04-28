@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	if _, err := RegisterService(); err != nil {
+	if _, err := registerService(); err != nil {
 		panic(err.Error())
 	}
 	endpoints.HandleHTTP()
