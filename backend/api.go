@@ -17,9 +17,11 @@ var (
 	audiences = []string{clientID}
 )
 
-func registerService() (rpcService *endpoints.RPCService, err error) {
-	api := &API{}
-	rpcService, err = endpoints.RegisterService(api,
+func registerService() (
+	rpcService *endpoints.RPCService,
+	err error,
+) {
+	rpcService, err = endpoints.RegisterService(&API{},
 		"api", "v1", "api", true)
 	if err != nil {
 		return
@@ -38,28 +40,33 @@ type API struct {
 }
 
 // Items ...
-func (api *API) Items(r *http.Request,
-	req *ItemsRequestMessage, resp *ItemsResponseMessage) (err error) {
+func (api *API) Items(
+	r *http.Request,
+	req *ItemsRequestMessage,
+	resp *ItemsResponseMessage,
+) error {
 
 	c := endpoints.NewContext(r)
-	_, err = getCurrentUser(c)
+	_, err := getCurrentUser(c)
 	if err != nil {
-		return
+		return err
 	}
 
-	return
+	return nil
 }
 
-func getCurrentUser(c endpoints.Context) (u *user.User, err error) {
-	u, err = endpoints.CurrentUser(c, scopes, audiences, clientIDs)
-	if err != nil {
-		c.Infof("%v", err)
-		err = endpoints.UnauthorizedError
-		return
+func getCurrentUser(
+	c endpoints.Context,
+) (
+	*user.User,
+	error,
+) {
+	u, err := endpoints.CurrentUser(c, scopes, audiences, clientIDs)
+	switch {
+	case
+		err != nil,
+		u == nil:
+		return nil, endpoints.UnauthorizedError
 	}
-	if u == nil {
-		err = endpoints.UnauthorizedError
-		return
-	}
-	return
+	return u, nil
 }
