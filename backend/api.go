@@ -62,11 +62,10 @@ func getCurrentUser(
 	error,
 ) {
 	u, err := endpoints.CurrentUser(c, scopes, audiences, clientIDs)
-	if err != nil {
-		c.Infof("%q", err)
-		return nil, endpoints.UnauthorizedError
-	}
-	if u == nil {
+	switch {
+	case
+		err != nil,
+		u == nil:
 		return nil, endpoints.UnauthorizedError
 	}
 	return u, nil
