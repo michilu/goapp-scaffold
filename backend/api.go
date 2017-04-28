@@ -44,32 +44,30 @@ func (api *API) Items(
 	r *http.Request,
 	req *ItemsRequestMessage,
 	resp *ItemsResponseMessage,
-) (err error) {
+) error {
 
 	c := endpoints.NewContext(r)
-	_, err = getCurrentUser(c)
+	_, err := getCurrentUser(c)
 	if err != nil {
-		return
+		return err
 	}
 
-	return
+	return nil
 }
 
 func getCurrentUser(
 	c endpoints.Context,
 ) (
-	u *user.User,
-	err error,
+	*user.User,
+	error,
 ) {
-	u, err = endpoints.CurrentUser(c, scopes, audiences, clientIDs)
+	u, err := endpoints.CurrentUser(c, scopes, audiences, clientIDs)
 	if err != nil {
 		c.Infof("%v", err)
-		err = endpoints.UnauthorizedError
-		return
+		return nil, endpoints.UnauthorizedError
 	}
 	if u == nil {
-		err = endpoints.UnauthorizedError
-		return
+		return nil, endpoints.UnauthorizedError
 	}
-	return
+	return u, nil
 }
