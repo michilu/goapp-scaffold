@@ -18,8 +18,7 @@ var (
 )
 
 func registerService() (rpcService *endpoints.RPCService, err error) {
-	api := &API{}
-	rpcService, err = endpoints.RegisterService(api,
+	rpcService, err = endpoints.RegisterService(&API{},
 		"api", "v1", "api", true)
 	if err != nil {
 		return
