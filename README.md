@@ -20,3 +20,25 @@ A scaffold for Google App Engine Golang.
 # start server
 
     $ dev_appserver.py backend
+
+# with swagger
+
+Go to http://editor.swagger.io/ , then save to `swagger.yaml`.
+
+Install go-swagger:
+
+    $ go get -u github.com/go-swagger/go-swagger/cmd/swagger
+
+Generate code:
+
+    $ make restapi
+
+Go to https://github.com/swagger-api/swagger-ui/releases .
+
+    $ curl -LO https://github.com/swagger-api/swagger-ui/archive/v3.0.9.tar.gz
+    $ open v3.0.9.tar.gz
+    $ mv swagger-ui-3.0.9 swagger-ui
+
+Go to [swagger-ui](http://localhost:8080/swagger-ui/?url=http://localhost:8080/swagger.json).
+
+    $ open "http://localhost:8080/swagger-ui/?url=http://localhost:8080/swagger.json"

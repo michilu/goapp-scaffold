@@ -4,9 +4,10 @@
 *.so
 
 # Folders
+/swagger-ui
+/vendor
 _obj
 _test
-vendor
 
 # Architecture specific extensions/prefixes
 *.[568vq]
@@ -23,6 +24,3 @@ _testmain.go
 *.exe
 *.test
 *.prof
-
-# dep
-/Gopkg.lock
