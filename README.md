@@ -23,16 +23,6 @@ A scaffold for Google App Engine Golang.
 
 # with swagger
 
-Go to http://editor.swagger.io/ , then save to `swagger.yaml`.
-
-Install go-swagger:
-
-    $ go get -u github.com/go-swagger/go-swagger/cmd/swagger
-
-Generate code:
-
-    $ make restapi
-
 Get swagger-ui:
 
     $ make swagger-ui
