@@ -1,15 +1,24 @@
 package app
 
 import (
+	"log"
 	"net/http"
 
-	"github.com/GoogleCloudPlatform/go-endpoints/endpoints"
+	"github.com/go-openapi/loads"
+
+	"github.com/MiCHiLU/goapp-scaffold/restapi"
+	"github.com/MiCHiLU/goapp-scaffold/restapi/operations"
 )
 
 func init() {
-	if _, err := registerService(); err != nil {
-		panic(err.Error())
+	swaggerSpec, err := loads.Analyzed(restapi.SwaggerJSON, "")
+	if err != nil {
+		log.Fatalln(err)
 	}
-	endpoints.HandleHTTP()
-	http.HandleFunc("/", handleFunc)
+	api := operations.NewExampleAPI(swaggerSpec)
+	server := restapi.NewServer(api)
+	server.ConfigureFlags()
+	server.ConfigureAPI()
+	http.Handle("/", server.GetHandler())
+	//http.HandleFunc("/", handleFunc)
 }

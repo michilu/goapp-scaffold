@@ -12,10 +12,16 @@ default_expiration: 10m
 
 handlers:
 # Static assets
-#- url: /_static
-#  static_dir: static
-- url: /_ah/spi/.*
-  script: _go_app
+# swagger-ui
+- url: /swagger-ui(.*)/
+  static_files: ../swagger-ui/dist\1/index.html
+  upload: /swagger-ui(.*)/index.html
+- url: /swagger-ui(.*)
+  static_files: ../swagger-ui/dist\1
+  upload: /swagger-ui(.*)
+- url: /swagger-ui/
+  static_dir: ../swagger-ui/dist
+
 - url: /.*
   script: _go_app
 
