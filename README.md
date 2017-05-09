@@ -43,6 +43,10 @@ Open [swagger-ui](http://localhost:8080/swagger-ui/?url=http://localhost:8080/sw
 
 # Deploy to the Google App Engine
 
+Create a Google App Engine application:
+
+    $ CLOUDSDK_CORE_PROJECT=<APP-ID> gcloud app create
+
 Get an OAuth 2.0 refresh token:
 
     $ jq .refresh_token ~/.appcfg_oauth2_tokens
