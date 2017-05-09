@@ -1,4 +1,4 @@
-memo = "8ac2b1c33326d8c9850a589dd6b8f0d6fe4fbe842a95adc83e5a51202cd3ced5"
+memo = "631144b98db37b778cfc7fb4a3628545107a094b03a102ef9a85c618394ac75f"
 
 [[projects]]
   name = "github.com/PuerkitoBio/purell"
@@ -79,9 +79,21 @@ memo = "8ac2b1c33326d8c9850a589dd6b8f0d6fe4fbe842a95adc83e5a51202cd3ced5"
   revision = "cc8532a8e9a55ea36402aa21efdf403a60d34096"
 
 [[projects]]
+  name = "github.com/rs/cors"
+  packages = ["."]
+  revision = "a62a804a8a009876ca59105f7899938a1349f4b3"
+  version = "v1.0"
+
+[[projects]]
+  name = "github.com/rs/xhandler"
+  packages = ["."]
+  revision = "d9d9599b6aaf6a058cb7b1f48291ded2cbd13390"
+  version = "v1.0"
+
+[[projects]]
   branch = "master"
   name = "golang.org/x/net"
-  packages = ["idna"]
+  packages = ["context","idna"]
   revision = "da118f7b8e5954f39d0d2130ab35d4bf0e3cb344"
 
 [[projects]]

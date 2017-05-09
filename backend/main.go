@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/loads"
+	"github.com/rs/cors"
 
 	"github.com/MiCHiLU/goapp-scaffold/restapi"
 	"github.com/MiCHiLU/goapp-scaffold/restapi/operations"
@@ -19,6 +20,6 @@ func init() {
 	server := restapi.NewServer(api)
 	server.ConfigureFlags()
 	server.ConfigureAPI()
-	http.Handle("/", server.GetHandler())
+	http.Handle("/", cors.Default().Handler(server.GetHandler()))
 	//http.HandleFunc("/", handleFunc)
 }
