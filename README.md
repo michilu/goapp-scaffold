@@ -40,3 +40,11 @@ Get swagger-ui:
 Open [swagger-ui](http://localhost:8080/swagger-ui/?url=http://localhost:8080/swagger.json).
 
     $ open "http://localhost:8080/swagger-ui/?url=http://localhost:8080/swagger.json"
+
+# Deploy to the Google App Engine
+
+Get an OAuth 2.0 refresh token:
+
+    $ jq .refresh_token ~/.appcfg_oauth2_tokens
+
+Then set to an `APP_ENGINE_TOKEN` of the application environment variables on the Wercker CI.
