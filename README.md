@@ -33,12 +33,10 @@ Generate code:
 
     $ make restapi
 
-Go to https://github.com/swagger-api/swagger-ui/releases .
+Get swagger-ui:
 
-    $ curl -LO https://github.com/swagger-api/swagger-ui/archive/v3.0.9.tar.gz
-    $ open v3.0.9.tar.gz
-    $ mv swagger-ui-3.0.9 swagger-ui
+    $ make swagger-ui
 
-Go to [swagger-ui](http://localhost:8080/swagger-ui/?url=http://localhost:8080/swagger.json).
+Open [swagger-ui](http://localhost:8080/swagger-ui/?url=http://localhost:8080/swagger.json).
 
     $ open "http://localhost:8080/swagger-ui/?url=http://localhost:8080/swagger.json"

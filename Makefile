@@ -11,3 +11,6 @@ fbs: $(FBS)
 
 restapi: swagger.yaml
 	swagger generate server --flag-strategy=pflag
+
+swagger-ui:
+	mkdir -p $@ && curl -L `curl -s https://api.github.com/repos/swagger-api/swagger-ui/releases/latest|jq -r .tarball_url`| tar xzfp - -C $@ --strip=1
