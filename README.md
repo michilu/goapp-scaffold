@@ -21,6 +21,16 @@ A scaffold for Google App Engine Golang.
 
     $ dev_appserver.py backend
 
+# with [goa](https://github.com/goadesign/goa)
+
+Install goa:
+
+    $ go get -u github.com/goadesign/goa/...
+
+Generate code:
+
+    $ goagen bootstrap -d github.com/MiCHiLU/goapp-scaffold/design
+
 # with swagger
 
 Get swagger-ui:
