@@ -5,16 +5,12 @@ import (
 	. "github.com/goadesign/goa/design/apidsl"
 )
 
-var _ = API("example", func() {
-	Title("example")
-})
+const (
+	appID = "example"
+)
 
-var OAuth2 = OAuth2Security("OAuth2", func() {
-	AccessCodeFlow(
-		"https://accounts.google.com/o/oauth2/auth",  //authorizationURL
-		"https://www.googleapis.com/oauth2/v4/token", //tokenURL
-	)
-	Scope("read", "read")
+var _ = API(appID, func() {
+	Title(appID)
 })
 
 var _ = Resource("items", func() {
@@ -22,8 +18,5 @@ var _ = Resource("items", func() {
 	Action("get", func() {
 		Routing(GET(""))
 		Response(OK)
-	})
-	Security(OAuth2, func() {
-		Scope("read")
 	})
 })

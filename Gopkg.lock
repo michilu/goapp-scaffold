@@ -1,1 +1,49 @@
-memo = "ab4fef131ee828e96ba67d31a7d690bd5f2f42040c6766b1b12fe856f87e0ff7"
+memo = "a723985c3bd7db3bef295e8e973fd283de04f2b5231efacc3c1d74799f8cc6bf"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/armon/go-metrics"
+  packages = ["."]
+  revision = "93f237eba9b0602f3e73710416558854a81d9337"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/dimfeld/httppath"
+  packages = ["."]
+  revision = "c8e499c3ef3c3e272ed8bdcc1ccf39f73c88debc"
+
+[[projects]]
+  name = "github.com/dimfeld/httptreemux"
+  packages = ["."]
+  revision = "86f7c217d9043ebc6adfd8e2ed04a0bb1e1db651"
+  version = "v3.8.0"
+
+[[projects]]
+  name = "github.com/goadesign/goa"
+  packages = [".","client","design","design/apidsl","dslengine","goatest","middleware","uuid"]
+  revision = "a0ccdda272740a6f830d126b23e6edd791abd8cb"
+  version = "v1.1.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/manveru/faker"
+  packages = ["."]
+  revision = "717f7cf83fb78669bfab612749c2e8ff63d5be11"
+
+[[projects]]
+  name = "github.com/satori/go.uuid"
+  packages = ["."]
+  revision = "879c5887cd475cd7864858769793b2ceb0d44feb"
+  version = "v1.1.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/zach-klippenstein/goregen"
+  packages = ["."]
+  revision = "795b5e3961ea1912fde60af417ad85e86acc0d6a"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/net"
+  packages = ["context","websocket"]
+  revision = "c9b681d35165f1995d6f3034e61f8761d4b90c99"

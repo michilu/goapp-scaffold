@@ -1,13 +1,26 @@
-all: fbs
+all: app swagger
 
+APP=app/controllers.go $(wildcard app/* app/test/*)
+SWAGGER=swagger/swagger.json $(wildcard swagger/*)
 BIN_FLATC=flatc
-
 FBS_DIR=backend
+
+REPO=$(shell echo $${PWD\#`go env GOPATH`/src/})
+
+app: $(APP)
+$(APP): design/design.go
+	goagen app -d ${REPO}/design
+
+swagger: $(SWAGGER)
+$(SWAGGER): design/design.go
+	goagen swagger -d ${REPO}/design
+
+swagger-ui:
+	mkdir -p $@ && curl -L `curl -s https://api.github.com/repos/swagger-api/swagger-ui/releases/latest|jq -r .tarball_url`| tar xzfp - -C $@ --strip=1
 
 FBS = $(shell find . -name "*.fbs.txt")
 fbs: $(FBS)
 	$(BIN_FLATC) --go $(FBS)
 	mv app/*.go $(FBS_DIR) && rm -r app
 
-swagger-ui:
-	mkdir -p $@ && curl -L `curl -s https://api.github.com/repos/swagger-api/swagger-ui/releases/latest|jq -r .tarball_url`| tar xzfp - -C $@ --strip=1
+.PHONY: app swagger

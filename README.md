@@ -29,7 +29,8 @@ Install goa:
 
 Generate code:
 
-    $ goagen bootstrap -d github.com/MiCHiLU/goapp-scaffold/design
+    $ goagen app -d github.com/MiCHiLU/goapp-scaffold/design
+    $ goagen swagger -d github.com/MiCHiLU/goapp-scaffold/design
 
 # with swagger
 
