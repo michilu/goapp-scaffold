@@ -22,6 +22,13 @@ build:
         /usr/local/go_appengine/gopath/bin/dep ensure
         /usr/local/go_appengine/gopath/bin/dep status
   - script:
+      name: goa
+      code: |
+        (cd vendor/github.com/goadesign/goa/goagen && GOROOT=/usr/local/go go get && GOROOT=/usr/local/go go build)
+        ./vendor/github.com/goadesign/goa/goagen/goagen version
+        ./vendor/github.com/goadesign/goa/goagen/goagen app -d github.com/MiCHiLU/goapp-scaffold/design
+        ./vendor/github.com/goadesign/goa/goagen/goagen swagger -d github.com/MiCHiLU/goapp-scaffold/design
+  - script:
       name: set GOPATH
       code: |
         export GOPATH="$GOPATH:$WERCKER_SOURCE_DIR"

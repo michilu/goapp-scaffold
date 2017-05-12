@@ -21,17 +21,18 @@ A scaffold for Google App Engine Golang.
 
     $ dev_appserver.py backend
 
-# with swagger
+# with [goa](https://github.com/goadesign/goa)
 
-Go to http://editor.swagger.io/ , then save to `swagger.yaml`.
+Install goa:
 
-Install go-swagger:
-
-    $ go get -u github.com/go-swagger/go-swagger/cmd/swagger
+    $ go get -u github.com/goadesign/goa/...
 
 Generate code:
 
-    $ make restapi
+    $ goagen app -d github.com/MiCHiLU/goapp-scaffold/design
+    $ goagen swagger -d github.com/MiCHiLU/goapp-scaffold/design
+
+# with swagger
 
 Get swagger-ui:
 

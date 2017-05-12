@@ -1,25 +1,23 @@
-package app
+package backend
 
 import (
-	"log"
 	"net/http"
 
-	"github.com/go-openapi/loads"
-	"github.com/rs/cors"
+	"github.com/goadesign/goa"
+	"github.com/goadesign/goa/middleware"
 
-	"github.com/MiCHiLU/goapp-scaffold/restapi"
-	"github.com/MiCHiLU/goapp-scaffold/restapi/operations"
+	"github.com/MiCHiLU/goapp-scaffold/app"
 )
 
 func init() {
-	swaggerSpec, err := loads.Analyzed(restapi.SwaggerJSON, "")
-	if err != nil {
-		log.Fatalln(err)
-	}
-	api := operations.NewExampleAPI(swaggerSpec)
-	server := restapi.NewServer(api)
-	server.ConfigureFlags()
-	server.ConfigureAPI()
-	http.Handle("/", cors.Default().Handler(server.GetHandler()))
+	service := goa.New("appengine")
+	service.Use(middleware.RequestID())
+	service.Use(middleware.LogRequest(true))
+	service.Use(middleware.ErrorHandler(service, true))
+	service.Use(middleware.Recover())
+
+	app.MountItemsController(service, newItemsController(service))
+
+	http.HandleFunc("/", service.Mux.ServeHTTP)
 	//http.HandleFunc("/", handleFunc)
 }
