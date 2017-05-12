@@ -1,4 +1,4 @@
-application: appid
+application: goapp-scaffold
 version: 1
 runtime: go
 api_version: go1
