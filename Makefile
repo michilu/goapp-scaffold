@@ -1,7 +1,7 @@
 all: app swagger
 
-APP=app/controllers.go $(wildcard app/* app/test/*)
-SWAGGER=swagger/swagger.json $(wildcard swagger/*)
+APP=$(sort app/controllers.go $(wildcard app/* app/test/*))
+SWAGGER=$(sort swagger/swagger.json $(wildcard swagger/*))
 BIN_FLATC=flatc
 FBS_DIR=backend
 
