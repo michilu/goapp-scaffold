@@ -20,7 +20,7 @@ var _ = API(appID, func() {
 
 var JWT = OAuth2Security("google_id_token", func() {
 	ImplicitFlow(authorizationURL)
-	Scope("read", "read")
+	Scope("openid", "OpenID connect")
 })
 
 var _ = Resource("items", func() {
@@ -30,7 +30,7 @@ var _ = Resource("items", func() {
 		Response(OK)
 	})
 	Security(JWT, func() {
-		Scope("read")
+		Scope("openid")
 		Metadata("swagger:extension:x-google-issuer", google_issuer)
 		Metadata("swagger:extension:x-google-jwks_uri", google_jwks_uri)
 		//Metadata("swagger:extension:x-google-audiences", google_audiences)
