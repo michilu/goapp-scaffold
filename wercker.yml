@@ -20,6 +20,7 @@ build:
       code: |
         GOROOT=/usr/local/go go get -u github.com/golang/dep/...
         /usr/local/go_appengine/gopath/bin/dep ensure
+        /usr/local/go_appengine/gopath/bin/dep status
   - script:
       name: set GOPATH
       code: |
