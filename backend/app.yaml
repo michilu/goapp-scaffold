@@ -1,5 +1,5 @@
 application: goapp-scaffold
-version: 1
+version: master
 runtime: go
 api_version: go1
 threadsafe: true
