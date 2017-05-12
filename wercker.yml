@@ -16,6 +16,13 @@ build:
         goapp version
         go version
   - script:
+      name: goa
+      code: |
+        GOROOT=/usr/local/go go get -u github.com/goadesign/goa/...
+        /usr/local/go_appengine/gopath/bin/goagen version
+        /usr/local/go_appengine/gopath/bin/goagen app -d github.com/MiCHiLU/goapp-scaffold/design
+        /usr/local/go_appengine/gopath/bin/goagen swagger -d github.com/MiCHiLU/goapp-scaffold/design
+  - script:
       name: dep
       code: |
         GOROOT=/usr/local/go go get -u github.com/golang/dep/...
