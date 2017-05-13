@@ -26,8 +26,9 @@ build:
       code: |
         (cd vendor/github.com/goadesign/goa/goagen && GOROOT=/usr/local/go go get && GOROOT=/usr/local/go go build)
         ./vendor/github.com/goadesign/goa/goagen/goagen version
-        ./vendor/github.com/goadesign/goa/goagen/goagen app -d github.com/MiCHiLU/goapp-scaffold/design
-        ./vendor/github.com/goadesign/goa/goagen/goagen swagger -d github.com/MiCHiLU/goapp-scaffold/design
+        export repo="${PWD#`goapp env GOPATH`/src/}"
+        ./vendor/github.com/goadesign/goa/goagen/goagen app -d ${repo}/design
+        ./vendor/github.com/goadesign/goa/goagen/goagen swagger -d ${repo}/design
   - script:
       name: set GOPATH
       code: |
