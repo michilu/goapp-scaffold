@@ -27,6 +27,9 @@ handlers:
 - url: /swagger-ui/
   static_dir: ../swagger-ui/dist
 
+- url: /_ah/.*
+  script: _go_app
+  login: admin
 - url: /.*
   script: _go_app
 

@@ -24,4 +24,13 @@ fbs: $(FBS)
 	$(BIN_FLATC) --go $(FBS)
 	mv app/*.go $(FBS_DIR) && rm -r app
 
+build:
+	go build ./app ./design && goapp build ./backend
+
+test:
+	go test ./app ./design && goapp test ./backend
+
+lint:
+	golint ./app ./backend
+
 .PHONY: app swagger

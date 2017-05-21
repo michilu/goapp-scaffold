@@ -48,6 +48,15 @@ Create a Google App Engine application:
 
     $ CLOUDSDK_CORE_PROJECT=<APP-ID> gcloud app create
 
+Create TaskQueue and Cron:
+
+    $ CLOUDSDK_CORE_PROJECT=<APP-ID> gcloud app deploy backend/queue.yaml
+    $ CLOUDSDK_CORE_PROJECT=<APP-ID> gcloud app deploy backend/cron.yaml
+
+Deploy to Google App Engine:
+
+    $ goapp deploy backend/app.yaml
+
 Get an OAuth 2.0 refresh token:
 
     $ jq .refresh_token ~/.appcfg_oauth2_tokens

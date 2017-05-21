@@ -1,0 +1,5 @@
+cron:
+- description: daily kick
+  url: /_ah/cronDailyKick
+  schedule: every day 00:00
+  timezone: UTC
