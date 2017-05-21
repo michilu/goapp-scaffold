@@ -11,6 +11,12 @@ A scaffold for Google App Engine Golang.
     $ git clone --depth 1 https://github.com/MiCHiLU/goapp-scaffold.git
     $ cd goapp-scaffold
 
+or, add to git remote and merge:
+
+    $ git remote add scaffold https://github.com/MiCHiLU/goapp-scaffold
+    $ git fetch --depth=1 scaffold master
+    $ git checkout scaffold/master .
+
 # dep
 
     $ go get -u github.com/golang/dep/...
