@@ -14,7 +14,7 @@ handlers:
 # Static assets
 # swagger
 - url: /swagger\.json
-  static_files: swagger.json
+  static_files: swagger/swagger.json
   upload: swagger/swagger\.json
   http_headers:
     Access-Control-Allow-Origin: '*'
