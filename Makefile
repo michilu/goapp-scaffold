@@ -2,8 +2,9 @@ all: app swagger
 
 GAE_DIR=backend
 DESIGN_DIR=design
+APP_DIR=app
 DESIGN=$(wildcard ${DESIGN_DIR}/*.go)
-APP=$(sort app/controllers.go $(wildcard app/* app/test/*))
+APP=$(sort ${APP_DIR}/controllers.go $(wildcard ${APP_DIR}/* ${APP_DIR}/test/*))
 SWAGGER=$(sort ${GAE_DIR}/swagger/swagger.json $(wildcard ${GAE_DIR}/swagger/*))
 BIN_FLATC=flatc
 FBS_DIR=${GAE_DIR}
@@ -25,15 +26,15 @@ swagger-ui:
 FBS = $(shell find . -name "*.fbs.txt")
 fbs: $(FBS)
 	$(BIN_FLATC) --go $(FBS)
-	mv app/*.go $(FBS_DIR) && rm -r app
+	mv ${APP_DIR}/*.go $(FBS_DIR) && rm -r ${APP_DIR}
 
 build:
-	go build ./app ${DESIGN_DIR} && goapp build ${GAE_DIR}
+	go build ${APP_DIR} ${DESIGN_DIR} && goapp build ${GAE_DIR}
 
 test:
-	go test ./app ${DESIGN_DIR} && goapp test ${GAE_DIR}
+	go test ${APP_DIR} ${DESIGN_DIR} && goapp test ${GAE_DIR}
 
 lint:
-	golint ./app ${GAE_DIR}
+	golint ${APP_DIR} ${GAE_DIR}
 
 .PHONY: app swagger
