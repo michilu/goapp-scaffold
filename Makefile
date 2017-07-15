@@ -1,5 +1,6 @@
 all: app swagger
 
+DESIGN=$(wildcard design/*.go)
 APP=$(sort app/controllers.go $(wildcard app/* app/test/*))
 SWAGGER=$(sort swagger/swagger.json $(wildcard swagger/*))
 BIN_FLATC=flatc
@@ -8,11 +9,11 @@ FBS_DIR=backend
 REPO=$(shell echo $${PWD\#`go env GOPATH`/src/})
 
 app: $(APP)
-$(APP): design/design.go
+$(APP): $(DESIGN)
 	goagen app -d ${REPO}/design
 
 swagger: $(SWAGGER)
-$(SWAGGER): design/design.go
+$(SWAGGER): $(DESIGN)
 	goagen swagger -d ${REPO}/design
 
 swagger-ui:
