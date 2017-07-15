@@ -1,7 +1,8 @@
 all: app swagger
 
 GAE_DIR=backend
-DESIGN=$(wildcard design/*.go)
+DESIGN_DIR=design
+DESIGN=$(wildcard ${DESIGN_DIR}/*.go)
 APP=$(sort app/controllers.go $(wildcard app/* app/test/*))
 SWAGGER=$(sort ${GAE_DIR}/swagger/swagger.json $(wildcard ${GAE_DIR}/swagger/*))
 BIN_FLATC=flatc
@@ -11,11 +12,11 @@ REPO=$(shell echo $${PWD\#`go env GOPATH`/src/})
 
 app: $(APP)
 $(APP): $(DESIGN)
-	goagen app -d ${REPO}/design
+	goagen app -d ${REPO}/${DESIGN_DIR}
 
 swagger: $(SWAGGER)
 $(SWAGGER): $(DESIGN)
-	goagen swagger --design ${REPO}/design --out ${GAE_DIR}
+	goagen swagger --design ${REPO}/${DESIGN_DIR} --out ${GAE_DIR}
 
 swagger-ui:
 	mkdir -p $@ && curl -L `curl -s https://api.github.com/repos/swagger-api/swagger-ui/releases/latest|jq -r .tarball_url`| tar xzfp - -C $@ --strip=1 --no-same-owner --no-same-permissions */dist
@@ -27,10 +28,10 @@ fbs: $(FBS)
 	mv app/*.go $(FBS_DIR) && rm -r app
 
 build:
-	go build ./app ./design && goapp build ${GAE_DIR}
+	go build ./app ${DESIGN_DIR} && goapp build ${GAE_DIR}
 
 test:
-	go test ./app ./design && goapp test ${GAE_DIR}
+	go test ./app ${DESIGN_DIR} && goapp test ${GAE_DIR}
 
 lint:
 	golint ./app ${GAE_DIR}
