@@ -16,6 +16,10 @@ const (
 
 var _ = API(appID, func() {
 	Title(appID)
+	Origin("http://localhost:8080", func() {
+		Headers("Content-Type")
+		Methods("GET")
+	})
 })
 
 var JWT = OAuth2Security("google_id_token", func() {
