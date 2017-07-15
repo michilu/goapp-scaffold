@@ -14,7 +14,7 @@ $(APP): $(DESIGN)
 
 swagger: $(SWAGGER)
 $(SWAGGER): $(DESIGN)
-	goagen swagger -d ${REPO}/design
+	goagen swagger --design ${REPO}/design
 
 swagger-ui:
 	mkdir -p $@ && curl -L `curl -s https://api.github.com/repos/swagger-api/swagger-ui/releases/latest|jq -r .tarball_url`| tar xzfp - -C $@ --strip=1 --no-same-owner --no-same-permissions */dist
