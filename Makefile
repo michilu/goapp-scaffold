@@ -1,19 +1,23 @@
 all: app swagger
 
-APP=$(sort app/controllers.go $(wildcard app/* app/test/*))
-SWAGGER=$(sort swagger/swagger.json $(wildcard swagger/*))
+GAE_DIR=backend
+DESIGN_DIR=design
+APP_DIR=app
+DESIGN=$(wildcard ${DESIGN_DIR}/*.go)
+APP=$(sort ${APP_DIR}/controllers.go $(wildcard ${APP_DIR}/* ${APP_DIR}/test/*))
+SWAGGER=$(sort ${GAE_DIR}/swagger/swagger.json $(wildcard ${GAE_DIR}/swagger/*))
 BIN_FLATC=flatc
-FBS_DIR=backend
+FBS_DIR=${GAE_DIR}
 
 REPO=$(shell echo $${PWD\#`go env GOPATH`/src/})
 
 app: $(APP)
-$(APP): design/design.go
-	goagen app -d ${REPO}/design
+$(APP): $(DESIGN)
+	goagen app -d ${REPO}/${DESIGN_DIR}
 
 swagger: $(SWAGGER)
-$(SWAGGER): design/design.go
-	goagen swagger -d ${REPO}/design
+$(SWAGGER): $(DESIGN)
+	goagen swagger --design ${REPO}/${DESIGN_DIR} --out ${GAE_DIR}
 
 swagger-ui:
 	mkdir -p $@ && curl -L `curl -s https://api.github.com/repos/swagger-api/swagger-ui/releases/latest|jq -r .tarball_url`| tar xzfp - -C $@ --strip=1 --no-same-owner --no-same-permissions */dist
@@ -22,15 +26,15 @@ swagger-ui:
 FBS = $(shell find . -name "*.fbs.txt")
 fbs: $(FBS)
 	$(BIN_FLATC) --go $(FBS)
-	mv app/*.go $(FBS_DIR) && rm -r app
+	mv ${APP_DIR}/*.go $(FBS_DIR) && rm -r ${APP_DIR}
 
 build:
-	go build ./app ./design && goapp build ./backend
+	go build ${APP_DIR} ${DESIGN_DIR} && goapp build ${GAE_DIR}
 
 test:
-	go test ./app ./design && goapp test ./backend
+	go test ${APP_DIR} ${DESIGN_DIR} && goapp test ${GAE_DIR}
 
 lint:
-	golint ./app ./backend
+	golint ${APP_DIR} ${GAE_DIR}
 
 .PHONY: app swagger

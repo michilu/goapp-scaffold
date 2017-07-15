@@ -13,9 +13,9 @@ default_expiration: 10m
 handlers:
 # Static assets
 # swagger
-- url: /swagger.json
-  static_files: ../swagger/swagger.json
-  upload: /swagger.json
+- url: /swagger.(json|yaml)
+  static_files: swagger/swagger.\1
+  upload: /swagger.(json|yaml)
   http_headers:
     Access-Control-Allow-Origin: '*'
 - url: /swagger-ui(.*)/
